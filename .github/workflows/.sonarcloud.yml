@@ -1,29 +1,20 @@
 name: Build
-
 on:
   push:
     branches:
       - main
-
+  pull_request:
+    types: [opened, synchronize, reopened]
 jobs:
-  build:
+  sonarcloud:
+    name: SonarCloud
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
-        with:
-          projectBaseDir: /
-          args: >
-            -Dsonar.organization=iamneo-production
-            -Dsonar.projectKey=sunilswizy_tic-tac-toe
-            -Dsonar.python.coverage.reportPaths=coverage.xml
-            -Dsonar.sources=lib/
-            -Dsonar.test.exclusions=tests/**
-            -Dsonar.tests=tests/
-            -Dsonar.verbose=true
         env:
+          GITHUB_TOKEN: 1234rthjrthtr556  # Needed to get PR information, if any
           SONAR_TOKEN: 811c9a490983734401ba4e491eaefc8bfa7281de
-          SONAR_PROJECT_KEY: sunilswizy_workflows
-          SONAR_ORGANIZATION: iamneo-production
