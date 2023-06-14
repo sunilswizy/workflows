@@ -8,6 +8,7 @@ name: Build
       - opened
       - synchronize
       - reopened
+      
 jobs:
   build:
     name: Build
