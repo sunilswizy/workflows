@@ -26,3 +26,10 @@ jobs:
           mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
           -Dsonar.projectKey=sunilswizy_workflows
           -Dsonar.login=811c9a490983734401ba4e491eaefc8bfa7281de
+      
+      - name: Trigger API
+        if: ${{ success() }} # Only run this step if the previous step (Build and analyze) is successful
+        env:
+          API_URL: https://api.examly.io/api/school/login # Replace with your API URL
+        run: |
+          curl -X GET $API_URL
