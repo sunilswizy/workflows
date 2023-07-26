@@ -32,6 +32,6 @@ jobs:
         env:
           API_URL: https://cf38-183-82-250-177.ngrok.io/api/restoreSonarQube
         run: |
-          REPO_OWNER=$(echo "${GITHUB_REPOSITORY}" | cut -d '/' -f 1)
-          API_PAYLOAD="{ \"teams_id\": \"$REPO_OWNER\" }"
+          REPO_NAME=$(echo "${GITHUB_REPOSITORY}" | cut -d '/' -f 2)
+          API_PAYLOAD="{ \"teams_id\": \"$REPO_NAME\" }"
           curl -X POST -H "Content-Type: application/json" -d "$API_PAYLOAD" $API_URL
