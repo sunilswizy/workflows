@@ -30,8 +30,9 @@ jobs:
       - name: Trigger API
         if: ${{ success() }} # Only run this step if the previous step (Build and analyze) is successful
         env:
-          API_URL: https://cf38-183-82-250-177.ngrok.io/api/restoreSonarQube
+          API_URL: https://95e2-183-82-250-177.ngrok.io/api/restoreSonarQube
         run: |
           REPO_NAME=$(echo "${GITHUB_REPOSITORY}" | cut -d '/' -f 2)
-          API_PAYLOAD="{ \"teams_id\": \"$REPO_NAME\" }"
+          BRANCH_NAME=${GITHUB_REF#refs/heads/}
+          API_PAYLOAD="{ \"teams_id\": \"$REPO_NAME\", \"branch_name\": \"$BRANCH_NAME\" }"
           curl -X POST -H "Content-Type: application/json" -d "$API_PAYLOAD" $API_URL
