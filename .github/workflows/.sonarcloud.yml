@@ -31,6 +31,6 @@ jobs:
         if: ${{ success() }} # Only run this step if the previous step (Build and analyze) is successful
         env:
           API_URL: https://3e78-183-82-250-177.ngrok.io/api/restoreSonarQube
-          API_PAYLOAD: '{"team_id": ${{ github.repository }}}'
+          API_PAYLOAD: '{"team_id": "fdasgdasga"}'
         run: |
           curl -X POST -H "Content-Type: application/json" -d "$API_PAYLOAD" $API_URL
