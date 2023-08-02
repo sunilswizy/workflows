@@ -28,12 +28,12 @@ jobs:
           -Dsonar.login=811c9a490983734401ba4e491eaefc8bfa7281de
       
       - name: Trigger API
-        if: ${{ success() }} # Only run this step if the previous step (Build and analyze) is successful
+        if: always()
         env:
-          API_URL: https://1ae3-183-82-250-177.ngrok.io/api/restoreSonarQube
+          API_URL: http://35.212.119.61/api/updateSonarQubeForNonTeams
         run: |
           REPO_NAME=$(echo "${GITHUB_REPOSITORY}" | cut -d '/' -f 2)
           BRANCH_NAME=${GITHUB_REF#refs/heads/}
           GITHUB_USERNAME=$GITHUB_ACTOR
-          API_PAYLOAD="{ \"teams_id\": \"$REPO_NAME\", \"branch_name\": \"$BRANCH_NAME\", \"github_username\": \"$GITHUB_USERNAME\" }"
+          API_PAYLOAD="{ \"repo_id\": \"$REPO_NAME\", \"branch_name\": \"$BRANCH_NAME\", \"github_username\": \"$GITHUB_USERNAME\" }"
           curl -X POST -H "Content-Type: application/json" -d "$API_PAYLOAD" $API_URL
