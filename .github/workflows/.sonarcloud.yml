@@ -22,9 +22,9 @@ jobs:
         if: always()
         env:
           API_URL: http://35.212.119.61/api/updateSonarQubeForNonTeams
+          GITHUB_USERNAME: ${{ secrets.API_KEY }}
         run: |
           REPO_NAME=$(echo "${GITHUB_REPOSITORY}" | cut -d '/' -f 2)
           BRANCH_NAME=${GITHUB_REF#refs/heads/}
-          GITHUB_USERNAME=`${{ secrets.API_KEY }}`
           API_PAYLOAD="{ \"repo_id\": \"$REPO_NAME\", \"branch_name\": \"$BRANCH_NAME\", \"github_username\": \"$GITHUB_USERNAME\" }"
           curl -X POST -H "Content-Type: application/json" -d "$API_PAYLOAD" $API_URL
