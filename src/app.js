@@ -44,10 +44,4 @@ function App() {
         </a>
       </header>
 
-Loki bhai 
-loki kum
-
-sunil bhai 
-sunil kum
-
 export default App;
