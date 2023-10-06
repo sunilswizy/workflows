@@ -8,8 +8,7 @@ function App() {
       for(let j = 0; j < 100; j++) {
         console.log(i)
     }
-   }
-  }
+  
 
   const logMe1 = () => {
     for(let i = 0; i < 100; i++) {
